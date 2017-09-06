@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.DTCore", "Beetle.DTCore\Beetle.DTCore.csproj", "{07E80951-927B-4613-888A-D4DB63B81B4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.DTManager", "Beetle.DTManager\Beetle.DTManager.csproj", "{CEE00477-EE20-4F2E-B27D-F29DE3F201E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.DTProcess", "Beetle.DTProcess\Beetle.DTProcess.csproj", "{71EE7F06-52EA-4695-8890-8469CE8F3D1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.DTNode", "Beetle.DTNode\Beetle.DTNode.csproj", "{2E5A84F8-9B2D-4CC2-B2AA-582FE8E2779A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.DTCase.HttpTest", "Beetle.DTCase.HttpTest\Beetle.DTCase.HttpTest.csproj", "{B5E37A8A-5F09-4901-A1D3-B6D04C809D2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.DTCenter", "Beetle.DTCenter\Beetle.DTCenter.csproj", "{DA5AB2F4-176A-49B1-A61E-34B3D3E985AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.DTCore.UnitTest", "Beetle.DTCore.UnitTest\Beetle.DTCore.UnitTest.csproj", "{A7FEAE58-5F6F-4844-B8F1-283D61409C1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07E80951-927B-4613-888A-D4DB63B81B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E80951-927B-4613-888A-D4DB63B81B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E80951-927B-4613-888A-D4DB63B81B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E80951-927B-4613-888A-D4DB63B81B4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEE00477-EE20-4F2E-B27D-F29DE3F201E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEE00477-EE20-4F2E-B27D-F29DE3F201E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEE00477-EE20-4F2E-B27D-F29DE3F201E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEE00477-EE20-4F2E-B27D-F29DE3F201E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71EE7F06-52EA-4695-8890-8469CE8F3D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71EE7F06-52EA-4695-8890-8469CE8F3D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71EE7F06-52EA-4695-8890-8469CE8F3D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71EE7F06-52EA-4695-8890-8469CE8F3D1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E5A84F8-9B2D-4CC2-B2AA-582FE8E2779A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5A84F8-9B2D-4CC2-B2AA-582FE8E2779A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5A84F8-9B2D-4CC2-B2AA-582FE8E2779A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5A84F8-9B2D-4CC2-B2AA-582FE8E2779A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5E37A8A-5F09-4901-A1D3-B6D04C809D2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5E37A8A-5F09-4901-A1D3-B6D04C809D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5E37A8A-5F09-4901-A1D3-B6D04C809D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5E37A8A-5F09-4901-A1D3-B6D04C809D2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA5AB2F4-176A-49B1-A61E-34B3D3E985AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA5AB2F4-176A-49B1-A61E-34B3D3E985AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA5AB2F4-176A-49B1-A61E-34B3D3E985AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA5AB2F4-176A-49B1-A61E-34B3D3E985AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7FEAE58-5F6F-4844-B8F1-283D61409C1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7FEAE58-5F6F-4844-B8F1-283D61409C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7FEAE58-5F6F-4844-B8F1-283D61409C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7FEAE58-5F6F-4844-B8F1-283D61409C1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
