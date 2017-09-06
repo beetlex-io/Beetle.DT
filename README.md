@@ -8,8 +8,54 @@
   ![image](https://github.com/IKende/Beetle.DT/blob/master/beetledt2.png)
   ![image](https://github.com/IKende/Beetle.DT/blob/master/beetledt3.png)
 ## 配置管理中心
-
+  Beetle.DTCenter.exe
+  ``` xml
+    管理中心服务端口
+    <add key="server-host" value=""/>
+    <add key="server-port" value="9091"/>
+    用户管理端服务端口
+   <add key="manager-host" value=""/>
+    <add key="manager-port" value="9092"/>
+  ```
 ## 配置节点
+  Beetle.DTNode.exe
+  ``` xml
+  设置管理中心的服务端口
+  <appSettings>
+    <!-- ... -->
+    <add key="server-host" value="127.0.0.1"/>
+    <add key="server-port" value="9091"/>
+    <!-- ... -->
+  </appSettings>
+  ```
+## 编写测试用例
+``` c#
+	public class Test : TestCase<Config>
+	{
+		public override string Name
+		{
+			get
+			{
+				return "httptest";
+			}
+		}
 
+		protected override void OnExecute()
+		{
+			System.Net.WebRequest wReq = System.Net.WebRequest.Create(Config.Url);
+			System.Net.WebResponse wResp = wReq.GetResponse();
+			System.IO.Stream respStream = wResp.GetResponseStream();
+			using (System.IO.StreamReader reader = new System.IO.StreamReader(respStream, Encoding.UTF8))
+			{
+				reader.ReadToEnd();
+			}
+		}
+	}
 
+	public class Config
+	{
+
+		public string Url { get; set; }
+	}
+```
 
