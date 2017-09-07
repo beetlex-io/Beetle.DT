@@ -198,6 +198,7 @@ namespace Beetle.DTCore.Center
 			foreach (string node in e.Nodes)
 			{
 				NodeAgent agent = NodeManager.Get(node);
+				agent.RemoveUnitTestStatistal(e.UnitTest);
 				agent.RunTest(e);
 			}
 			mUnitTestManagers[e.UnitTest] = pdce.Session;

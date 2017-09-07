@@ -34,6 +34,13 @@ namespace Beetle.DTCore.Center
 			mUnitTestStatistial.TryGetValue(name, out result);
 			return result;
 		}
+
+		public void RemoveUnitTestStatistal(string name)
+		{
+			StatisticalReport result = null;
+			mUnitTestStatistial.TryRemove(name, out result);
+		}
+
 		public void SetUnitTestStatistal(string name, StatisticalReport item)
 		{
 			mUnitTestStatistial[name] = item;

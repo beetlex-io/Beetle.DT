@@ -273,5 +273,16 @@ namespace Beetle.DTManager
 			report.Text = mLastTest + " report";
 			report.ShowDialog(this);
 		}
+
+		private void lstNodes_DoubleClick(object sender, EventArgs e)
+		{
+			if (lstNodes.SelectedItems != null && lstNodes.SelectedItems.Count > 0)
+			{
+				FrmMain.NodeListViewItem item = (FrmMain.NodeListViewItem)lstNodes.SelectedItems[0];
+				FrmErrors frmError = new DTManager.FrmErrors();
+				frmError.Errors = item.Info.Report.Errors;
+				frmError.Show(this);
+			}
+		}
 	}
 }

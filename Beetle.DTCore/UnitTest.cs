@@ -207,7 +207,7 @@ namespace Beetle.DTCore
 
 			AddDelayTime(Process.TimeWatch.ElapsedMilliseconds - c.LastTime);
 			this.StatisticalInfo.Error.Add();
-			Errors[this.StatisticalInfo.Error.Value % 20] = e;
+			AddError(e);
 			mCaseQueue.Enqueue(c);
 		}
 

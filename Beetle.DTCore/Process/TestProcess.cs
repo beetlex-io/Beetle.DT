@@ -51,6 +51,7 @@ namespace Beetle.DTCore.Process
 		{
 			TimeWatch.Restart();
 			mRouteCenter.Register(this);
+			LoadCase();
 			if (!mClient.Connect())
 			{
 				Loger.Process(LogType.ERROR, "connect to node error {0}", mClient.LastError.Message);
@@ -59,7 +60,7 @@ namespace Beetle.DTCore.Process
 			{
 				Loger.Process(LogType.INFO, "connect to node!");
 			}
-			LoadCase();
+			
 		}
 
 		public bool Run(string name, int user, string config)

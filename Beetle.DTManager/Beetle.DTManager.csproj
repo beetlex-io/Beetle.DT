@@ -73,6 +73,12 @@
     <Compile Include="FrmAbout.Designer.cs">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmErrors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmErrors.Designer.cs">
+      <DependentUpon>FrmErrors.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmInput.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmErrors.resx">
+      <DependentUpon>FrmErrors.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmInput.resx">
       <DependentUpon>FrmInput.cs</DependentUpon>
