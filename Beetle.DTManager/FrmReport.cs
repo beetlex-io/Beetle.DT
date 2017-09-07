@@ -56,14 +56,14 @@ namespace Beetle.DTManager
 				errors += node.Report.GetErrors();
 			}
 			var successpoint = new DataPoint();
-			successpoint.LegendText = "Success(#VAL{N0})"; 
+			successpoint.LegendText = "Success(#VAL{N0})";
 			successpoint.YValues = new double[] { success };
-			
+
 			serises.Points.Add(successpoint);
 			var errorpoint = new DataPoint();
 			errorpoint.LegendText = "Error(#VAL{N0})";
 			errorpoint.YValues = new double[] { errors };
-			
+
 			serises.Points.Add(errorpoint);
 		}
 
@@ -75,9 +75,9 @@ namespace Beetle.DTManager
 			foreach (NodeInfo node in Nodes)
 			{
 				var point = new DataPoint();
-				point.LegendText = string.Format("{0}[{1}]", node.EndPoint, node.Name)+ "(#VAL{N0})";
+				point.LegendText = node.EndPoint + "(#VAL{N0})  " + node.Name;
 				point.YValues = new double[] { node.Report.GetSuccess() };
-			
+
 				serises.Points.Add(point);
 			}
 		}
@@ -87,7 +87,8 @@ namespace Beetle.DTManager
 			var serises = chartResponseTime.Series["Series1"];
 			serises.Points.Clear();
 			ResponseTimeRegion[] regions = new ResponseTimeRegion[] {
-				new ResponseTimeRegion(0,50),
+				new ResponseTimeRegion(0,20),
+				new ResponseTimeRegion(20,50),
 				new ResponseTimeRegion(50,100),
 				new ResponseTimeRegion(100,200),
 				new ResponseTimeRegion(200,500),
@@ -137,9 +138,9 @@ namespace Beetle.DTManager
 			public DataPoint CreatePoint()
 			{
 				var result = new DataPoint();
-				result.LegendText = Name+ "(#VAL{N0})";
+				result.LegendText = Name + "(#VAL{N0})";
 				result.YValues = new double[] { Count };
-				
+
 				return result;
 			}
 

@@ -107,7 +107,10 @@ namespace Beetle.DTCore.Center
 				{
 					string result = mFolder.CreateFolder(name);
 					TestInfo folder = new TestInfo(result, name);
+					folder.Log = this.Log;
 					mFolders[name] = folder;
+					folder.CopyCoreFile();
+					folder.GetDomainAdapter();
 					return result;
 				}
 			}

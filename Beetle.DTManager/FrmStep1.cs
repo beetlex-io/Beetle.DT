@@ -33,6 +33,8 @@ namespace Beetle.DTManager
 
 		private long mErrors;
 
+		private string mLastTest = "";
+
 		private void FrmStep1_Load(object sender, EventArgs e)
 		{
 			Client.ListTestCase(UnitTest);
@@ -92,6 +94,14 @@ namespace Beetle.DTManager
 			NodeInfo node = this.Nodes.FirstOrDefault(n => n.Name == e.Node);
 			if (node != null)
 				node.Report.Errors.AddRange(e.Errors);
+
+			foreach (FrmMain.NodeListViewItem item in this.lstNodes.Items)
+			{
+				if (item.Info.Report.Errors.Count > 0)
+					item.ImageIndex = 1;
+				else
+					item.ImageIndex = 0;
+			}
 		}
 
 
@@ -162,6 +172,7 @@ namespace Beetle.DTManager
 					match.PerformanceInfo = node.PerformanceInfo;
 			}
 			FrmMain.BindNodeListView(this.Nodes, lstNodes);
+
 		}
 
 		private void lstFolders_SelectedIndexChanged(object sender, EventArgs e)
@@ -201,6 +212,7 @@ namespace Beetle.DTManager
 			ListViewItem item = GetSelectItem();
 			if (item != null)
 			{
+				mLastTest = item.Text;
 				mSuccess = 0;
 				mErrors = 0;
 				chart1.Series["Success"].Points.Clear();
@@ -258,6 +270,7 @@ namespace Beetle.DTManager
 		{
 			FrmReport report = new DTManager.FrmReport();
 			report.Nodes = this.Nodes;
+			report.Text = mLastTest + " report";
 			report.ShowDialog(this);
 		}
 	}

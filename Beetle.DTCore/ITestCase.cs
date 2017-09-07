@@ -40,15 +40,15 @@ namespace Beetle.DTCore
 			try
 			{
 				OnExecute();
-				OnSuccess();
+				Completed();
 			}
 			catch (Exception e)
 			{
-				OnError(e);
+				Completed(e);
 			}
 		}
 
-		protected abstract void OnExecute();
+		protected virtual void OnExecute() { }
 
 		public abstract string Name { get; }
 
@@ -56,13 +56,22 @@ namespace Beetle.DTCore
 
 		public Action<ITestCase> Success { get; set; }
 
-		protected void OnError(Exception e)
+		protected virtual bool Completed(Exception e = null)
+		{
+			if (e == null)
+				OnSuccess();
+			else
+				OnError(e);
+			return e == null;
+		}
+
+		private void OnError(Exception e)
 		{
 			if (Error != null)
 				Error(e, this);
 		}
 
-		protected void OnSuccess()
+		private void OnSuccess()
 		{
 			if (Success != null)
 			{

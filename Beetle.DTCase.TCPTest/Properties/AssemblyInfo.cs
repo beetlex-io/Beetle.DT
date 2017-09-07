@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Beetle.DTCase.Http")]
+[assembly: AssemblyTitle("Beetle.DTCase.Tcp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Beetle.DTCase.Http")]
+[assembly: AssemblyProduct("Beetle.DTCase.Tcp")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("b5e37a8a-5f09-4901-a1d3-b6d04c809d2c")]
+[assembly: Guid("2170603f-8d05-419e-87a8-d60f252d75e6")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

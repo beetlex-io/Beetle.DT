@@ -98,36 +98,51 @@ namespace Beetle.DTCore
 
 		public void Execute()
 		{
-			mCaseQueue = new ConcurrentQueue<ITestCase>();
-			Handler = Case.Handler;
-			if (Handler == null)
-				Handler = new TestProcessHandler();
-			Started = true;
-			this.StatisticalInfo.Reset();
-			this.StatisticalInfo.Success.Result();
-			this.StatisticalInfo.Error.Result();
-			GetDelayTimes();
-			Type caseType = Case.GetType();
-			object config = null;
-			System.Reflection.PropertyInfo property = caseType.GetProperty("Config", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-			if (property != null)
+			try
 			{
-				config = Newtonsoft.Json.JsonConvert.DeserializeObject(Config, property.PropertyType);
-			}
-			for (int i = 0; i < Users; i++)
-			{
-				ITestCase item = (ITestCase)Activator.CreateInstance(caseType);
+				mCaseQueue = new ConcurrentQueue<ITestCase>();
+				Handler = Case.Handler;
+				if (Handler == null)
+					Handler = new TestProcessHandler();
+				Started = true;
+				this.StatisticalInfo.Reset();
+				this.StatisticalInfo.Success.Result();
+				this.StatisticalInfo.Error.Result();
+				GetDelayTimes();
+				Type caseType = Case.GetType();
+				object config = null;
+				System.Reflection.PropertyInfo property = caseType.GetProperty("Config", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
 				if (property != null)
 				{
-					property.SetValue(item, config);
+					config = Newtonsoft.Json.JsonConvert.DeserializeObject(Config, property.PropertyType);
 				}
-				item.Init();
-				item.Error = OnError;
-				item.Success = OnSuccess;
-				mCaseQueue.Enqueue(item);
-			}
+				for (int i = 0; i < Users; i++)
+				{
+					ITestCase item = (ITestCase)Activator.CreateInstance(caseType);
+					if (property != null)
+					{
+						property.SetValue(item, config);
+					}
+					try
+					{
+						item.Init();
+					}
+					catch (Exception e_)
+					{
+						AddError(new Exception(string.Format("test case init error {0}", e_.Message)));
+						return;
+					}
+					item.Error = OnError;
+					item.Success = OnSuccess;
+					mCaseQueue.Enqueue(item);
+				}
 
-			System.Threading.ThreadPool.QueueUserWorkItem(OnExecute);
+				System.Threading.ThreadPool.QueueUserWorkItem(OnExecute);
+			}
+			catch (Exception e_)
+			{
+				AddError(e_);
+			}
 		}
 
 		public void Stop()
@@ -147,7 +162,14 @@ namespace Beetle.DTCore
 					{
 						if (mCaseQueue.TryDequeue(out tcase))
 						{
-							tcase.Reset();
+							try
+							{
+								tcase.Reset();
+							}
+							catch (Exception e_)
+							{
+								AddError(new Exception(string.Format("test case reset error {0}", e_.Message)));
+							}
 							tcase.LastTime = Process.TimeWatch.ElapsedMilliseconds;
 							Handler.Execute(tcase);
 						}
