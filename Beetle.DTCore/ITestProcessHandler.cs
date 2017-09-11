@@ -15,18 +15,8 @@ namespace Beetle.DTCore
 	{
 		public void Execute(ITestCase test)
 		{
-			Task.Run(() =>
-			{
-				try
-				{
-					test.Execute();
-					
-				}
-				catch
-				{
-				}
 
-			});
+			Task.Run(new Action(test.Execute));
 		}
 	}
 

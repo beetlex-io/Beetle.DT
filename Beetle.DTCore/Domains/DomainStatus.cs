@@ -5,9 +5,12 @@ using System.Text;
 
 namespace Beetle.DTCore.Domains
 {
-    public enum DomainStatus
-    {
-        Start,
-        Stop
-    }
+	public enum DomainStatus
+	{
+		None,
+		Completed,
+		Error,
+		Uploading,
+		Stop
+	}
 }

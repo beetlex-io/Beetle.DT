@@ -58,14 +58,14 @@ namespace Beetle.DTCore.Center
 			return result;
 		}
 
-		public List<string> ListFolders()
+		public List<FolderInfo> ListFolders()
 		{
 			lock (this)
 			{
-				List<string> result = new List<string>();
+				List<FolderInfo> result = new List<FolderInfo>();
 				foreach (TestInfo item in mFolders.Values)
 				{
-					result.Add(item.Name);
+					result.Add(new DTCore.Center.FolderInfo { Name = item.Name, Status = item.GetDomainAdapter().Status, Cases = item.GetDomainAdapter().GetUnitTests() });
 				}
 				return result;
 			}
@@ -122,6 +122,7 @@ namespace Beetle.DTCore.Center
 			if (mFolders.TryGetValue(test, out info))
 			{
 				info.Folder.UpdateFile(filename, data);
+				info.GetDomainAdapter().Status = Domains.DomainStatus.Uploading;
 			}
 		}
 	}

@@ -15,7 +15,7 @@ namespace Beetle.DTCore.Center
 	{
 		public ServerCenter()
 		{
-			mUnitTestPath = AppDomain.CurrentDomain.BaseDirectory + System.IO.Path.DirectorySeparatorChar + @"UnitTest" + System.IO.Path.DirectorySeparatorChar;
+			mUnitTestPath = AppDomain.CurrentDomain.BaseDirectory  + @"UnitTest" + System.IO.Path.DirectorySeparatorChar;
 			Loger = new LogHandlerAdapter();
 			TimeWatch = new System.Diagnostics.Stopwatch();
 			TimeWatch.Restart();

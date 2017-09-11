@@ -327,6 +327,7 @@
 			this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
 			this.imageList1.Images.SetKeyName(0, "文件夹.png");
 			this.imageList1.Images.SetKeyName(1, "if_document_2318462.png");
+			this.imageList1.Images.SetKeyName(2, "文件夹 (1).png");
 			// 
 			// lstFolders
 			// 

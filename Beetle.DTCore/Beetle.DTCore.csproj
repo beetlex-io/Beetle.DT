@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Center\FolderInfo.cs" />
     <Compile Include="Center\NodeInfo.cs" />
     <Compile Include="Center\NodeManager.cs" />
     <Compile Include="Center\SyncMonitor.cs" />

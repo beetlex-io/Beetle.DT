@@ -113,7 +113,7 @@ namespace Beetle.DTCore.Domains
 				catch (Exception e_)
 				{
 					if (Log != null)
-						Log.Error("<{0}> domain load {1} assembly error:{3}.", AppName, item.Name, e_.Message);
+						Log.Error("<{0}> domain load {1} assembly error:{2}", AppName, item.Name, e_.Message);
 				}
 			}
 			if (CompilerFiles)

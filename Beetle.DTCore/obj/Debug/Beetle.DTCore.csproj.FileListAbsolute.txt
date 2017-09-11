@@ -1,9 +1,0 @@
-D:\dev\Beetle.DT\Beetle.DT\Beetle.DTCore\bin\Debug\Beetle.DTCore.dll
-D:\dev\Beetle.DT\Beetle.DT\Beetle.DTCore\bin\Debug\Beetle.DTCore.pdb
-D:\dev\Beetle.DT\Beetle.DT\Beetle.DTCore\bin\Debug\BeetleX.dll
-D:\dev\Beetle.DT\Beetle.DT\Beetle.DTCore\bin\Debug\Newtonsoft.Json.dll
-D:\dev\Beetle.DT\Beetle.DT\Beetle.DTCore\bin\Debug\Newtonsoft.Json.xml
-D:\dev\Beetle.DT\Beetle.DT\Beetle.DTCore\obj\Debug\Beetle.DTCore.dll
-D:\dev\Beetle.DT\Beetle.DT\Beetle.DTCore\obj\Debug\Beetle.DTCore.pdb
-D:\dev\Beetle.DT\Beetle.DT\Public\DTNode\Beetle.DTCore.dll
-D:\dev\Beetle.DT\Beetle.DT\Public\DTNode\Beetle.DTCore.pdb

@@ -42,7 +42,8 @@ namespace Beetle.DTManager
 			Codes.CenterSetting setting = Codes.ManagerSetting.GetCenterSetting();
 			txtAddress.Text = setting.Host;
 			txtPort.Text = setting.Port.ToString();
-
+			this.Text = string.Format("Performance Test Manager [{0}]",
+				this.GetType().Assembly.GetName().Version.ToString());
 			mClient.MessageRoute.Register(this);
 		}
 
@@ -51,13 +52,72 @@ namespace Beetle.DTManager
 		[FrmInvokeFilter]
 		public void OnList(ListFolderResponse e)
 		{
-			lstFolders.Items.Clear();
-			foreach (string item in e.Items)
+			//lstFolders.Items.Clear();
+			foreach (FolderInfo item in e.Items)
 			{
-
-				lstFolders.Items.Add(item, 0);
+				FolderListViewItem vi = lstFolders.Items.Cast<FolderListViewItem>().FirstOrDefault(i => i.Info.Name == item.Name);
+				if (vi != null)
+				{
+					vi.Info = item;
+				}
+				else
+				{
+					lstFolders.Items.Add(new FolderListViewItem(item));
+				}
+			}
+			List<FolderListViewItem> removes = new List<FolderListViewItem>();
+			foreach (FolderListViewItem vitem in lstFolders.Items.Cast<FolderListViewItem>())
+			{
+				if (!e.Items.Contains(vitem.Info))
+				{
+					removes.Add(vitem);
+				}
+			}
+			foreach (FolderListViewItem vitem in removes)
+			{
+				lstFolders.Items.Remove(vitem);
 			}
 		}
+
+		public class FolderListViewItem : ListViewItem
+		{
+			public FolderListViewItem(FolderInfo info) : base(info.Name)
+			{
+				this.Info = info;
+			}
+
+			private FolderInfo mInfo;
+
+			public FolderInfo Info
+			{
+				get { return mInfo; }
+				set
+				{
+					mInfo = value;
+					if (mInfo.Status == DTCore.Domains.DomainStatus.Completed)
+					{
+						ImageIndex = 0;
+
+					}
+
+					else
+					{
+						ImageIndex = 2;
+					}
+					this.Text = string.Format("{0}({1})", Info.Name, Info.Cases == null ? 0 : Info.Cases.Length);
+
+				}
+			}
+
+			public override bool Equals(object obj)
+			{
+
+
+				return base.Equals(obj);
+			}
+		}
+
+
 		[Handler]
 		[FrmInvokeFilter]
 		public void OnListNode(ListNodeResponse e)
@@ -213,7 +273,7 @@ namespace Beetle.DTManager
 				cmdNew.Enabled = cmdDisconnect.Enabled = !(cmdConnect.Enabled = !mClient.NetClient.Connected);
 				if (mClient.NetClient.Connected)
 				{
-
+					mClient.List();
 					mClient.ListNode();
 				}
 			}
@@ -301,10 +361,10 @@ namespace Beetle.DTManager
 		}
 
 
-		public ListViewItem GetSelectItem()
+		public FolderListViewItem GetSelectItem()
 		{
 			if (lstFolders.SelectedItems.Count > 0)
-				return lstFolders.SelectedItems[0];
+				return (FolderListViewItem)lstFolders.SelectedItems[0];
 			return null;
 		}
 
@@ -371,9 +431,21 @@ namespace Beetle.DTManager
 				MessageBox.Show(this, "Please select the service node for the stress test!");
 				return;
 			}
+			FolderListViewItem item = GetSelectItem();
+			if (item.Info.Status != DTCore.Domains.DomainStatus.Completed)
+			{
+				MessageBox.Show(this, "Please wait while the test case is loaded!");
+				return;
+
+			}
+			if (item.Info.Cases == null || item.Info.Cases.Length == 0)
+			{
+				MessageBox.Show(this, string.Format("{0} no test cases that can run!", item.Name));
+				return;
+			}
 			mFrmStep = new FrmStep1();
 			mClient.MessageRoute.Register(mFrmStep);
-			mFrmStep.UnitTest = GetSelectItem().Text;
+			mFrmStep.UnitTest = item.Info.Name;
 			mFrmStep.Text = mFrmStep.UnitTest;
 			mFrmStep.Client = mClient;
 			mFrmStep.Nodes = nodes;

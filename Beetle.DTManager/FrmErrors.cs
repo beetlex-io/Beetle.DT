@@ -34,7 +34,12 @@ namespace Beetle.DTManager
 
 		private void lstErrors_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			if (lstErrors.SelectedItem != null)
+			{
+				Beetle.DTCore.Network.ErrorInfo info = (Beetle.DTCore.Network.ErrorInfo)lstErrors.SelectedItem;
+				richTextBox1.Text = info.StackTrace;
 
+			}
 		}
 	}
 }

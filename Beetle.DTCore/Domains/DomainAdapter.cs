@@ -11,7 +11,7 @@ namespace Beetle.DTCore.Domains
 
 		public DomainAdapter(string appPath, string appName, DomainArgs args)
 		{
-			Status = DomainStatus.Stop;
+			Status = DomainStatus.None;
 			mArgs = args;
 			if (appPath.LastIndexOf(System.IO.Path.DirectorySeparatorChar) != appPath.Length - 1)
 			{
@@ -54,6 +54,7 @@ namespace Beetle.DTCore.Domains
 		{
 			try
 			{
+				Status = DomainStatus.Uploading;
 				if (Log != null)
 				{
 					Log.Info("<{0}> on updating!", AppName);
@@ -68,6 +69,7 @@ namespace Beetle.DTCore.Domains
 			}
 			catch (Exception e_)
 			{
+				Status = DomainStatus.Error;
 				if (Log != null)
 				{
 					Log.Error("<{0}> domain update error {1}!", AppName, e_.Message);
@@ -116,6 +118,7 @@ namespace Beetle.DTCore.Domains
 		{
 			try
 			{
+				Status = DomainStatus.None;
 				Log.Info("<{0}> domain creating ...", AppName);
 				Type loadertype = typeof(AssemblyLoader);
 				AppDomainSetup setup = new AppDomainSetup();
@@ -137,10 +140,11 @@ namespace Beetle.DTCore.Domains
 				mLoader.LoadAssembly(AppPath);
 				mLoader.Load();
 				Log.Info("<{0}> domain created!", AppName);
-				Status = DomainStatus.Start;
+				Status = DomainStatus.Completed;
 			}
 			catch (Exception e_)
 			{
+				Status = DomainStatus.Error;
 				if (Log != null)
 				{
 					Log.Error("<{0}> domain Creating error {1}!", AppName, e_.Message);
@@ -153,6 +157,7 @@ namespace Beetle.DTCore.Domains
 
 			if (mLoader != null)
 			{
+				Status = DomainStatus.Stop;
 				try
 				{
 					Log.Info("<{0}> domain unloading ...", AppName);
@@ -164,6 +169,7 @@ namespace Beetle.DTCore.Domains
 				}
 				catch (Exception e_)
 				{
+					Status = DomainStatus.Error;
 					if (Log != null)
 					{
 						Log.Error("<{0}> domain unload error {1}!", AppName, e_.Message);

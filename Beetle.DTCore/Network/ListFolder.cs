@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Beetle.DTCore.Center;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,9 @@ namespace Beetle.DTCore.Network
 
 		public ListFolderResponse()
 		{
-			Items = new List<string>();
+			Items = new List<FolderInfo>();
 		}
-		public List<string> Items { get; set; }
+		public List<FolderInfo> Items { get; set; }
 	}
 
 }
