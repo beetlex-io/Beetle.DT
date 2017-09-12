@@ -1,0 +1,13 @@
+Beetle.DTCase.Config/bin/
+Beetle.DTCase.Config/obj/
+Beetle.DTCase.Sql/bin/
+Beetle.DTCase.Sql/obj/
+Beetle.DTCase.TCPTest/bin/
+Beetle.DTCase.TCPTest/obj/
+Beetle.DTCenter.WinService/bin/
+Beetle.DTCenter.WinService/obj/
+Beetle.DTCenter/bin/
+Beetle.DTCore/obj/
+Beetle.DTManager/bin/
+Beetle.DTManager/obj/
+Beetle.DTNode.WinService/obj/

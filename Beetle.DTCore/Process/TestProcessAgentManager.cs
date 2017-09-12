@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.Concurrent;
 namespace Beetle.DTCore.Process
 {
-	public class TestProcessAgentManager
+	public class TestProcessAgentManager:IDisposable
 	{
 		public TestProcessAgentManager(Node.NodeApp app)
 		{
@@ -48,5 +48,14 @@ namespace Beetle.DTCore.Process
 				return agent;
 			}
 		}
-	}
+
+        public void Dispose()
+        {
+            foreach (TestProcessAgent item in ProcessAgents.Values)
+            {
+                item.Dispose();
+            }
+
+        }
+    }
 }

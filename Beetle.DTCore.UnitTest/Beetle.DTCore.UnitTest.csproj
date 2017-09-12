@@ -61,6 +61,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Beetle.DTCase.Config\Beetle.DTCase.Config.csproj">
+      <Project>{b02ea782-d646-4ab7-b2ae-97c172b7c9d0}</Project>
+      <Name>Beetle.DTCase.Config</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Beetle.DTCase.TCPTest\Beetle.DTCase.Tcp.csproj">
       <Project>{2170603f-8d05-419e-87a8-d60f252d75e6}</Project>
       <Name>Beetle.DTCase.Tcp</Name>

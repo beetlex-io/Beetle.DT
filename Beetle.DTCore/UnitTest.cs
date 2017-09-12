@@ -114,7 +114,17 @@ namespace Beetle.DTCore
 				System.Reflection.PropertyInfo property = caseType.GetProperty("Config", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
 				if (property != null)
 				{
-					config = Newtonsoft.Json.JsonConvert.DeserializeObject(Config, property.PropertyType);
+					if (property.PropertyType.IsEnum || property.PropertyType.IsValueType || property.PropertyType == typeof(string))
+					{
+						Newtonsoft.Json.Linq.JObject jobj = (Newtonsoft.Json.Linq.JObject)Newtonsoft.Json.JsonConvert.DeserializeObject(Config);
+						config = jobj["Value"].ToObject(property.PropertyType);
+
+					}
+					else
+					{
+						config = Newtonsoft.Json.JsonConvert.DeserializeObject(Config, property.PropertyType);
+					}
+
 				}
 				for (int i = 0; i < Users; i++)
 				{

@@ -302,10 +302,10 @@ namespace Beetle.DTManager
 				System.Array items = ((System.Array)e.Data.GetData(DataFormats.FileDrop));
 				foreach (string item in items)
 				{
-					var result = mClient.UpdateFile(GetSelectItem().Text, item);
+					var result = mClient.UpdateFile(GetSelectItem().Info.Name, item);
 					mResultHandler[result.ID] = (r) =>
 					{
-						mClient.ListFiles(GetSelectItem().Text);
+						mClient.ListFiles(GetSelectItem().Info.Name);
 					};
 				}
 
@@ -372,7 +372,7 @@ namespace Beetle.DTManager
 		{
 			if (GetSelectItem() != null)
 			{
-				mClient.ListFiles(GetSelectItem().Text);
+				mClient.ListFiles(GetSelectItem().Info.Name);
 				lstFiles.Items.Clear();
 			}
 			cmdRun.Enabled = cmdUpload.Enabled = cmdDelete.Enabled = GetSelectItem() != null;

@@ -33,6 +33,12 @@ namespace Beetle.DTCore
 
 	public abstract class TestCase<T> : ITestCase
 	{
+
+		public TestCase()
+		{
+			Path = AppDomain.CurrentDomain.BaseDirectory;
+		}
+
 		public T Config { get; set; }
 
 		public virtual void Execute()
@@ -47,6 +53,8 @@ namespace Beetle.DTCore
 				Completed(e);
 			}
 		}
+
+		public string Path { get; set; }
 
 		protected virtual void OnExecute() { }
 
@@ -99,6 +107,33 @@ namespace Beetle.DTCore
 			{
 				return null;
 			}
+		}
+
+		protected System.IO.Stream CreateFile(string name)
+		{
+			string file = Path + name;
+			return System.IO.File.Create(file);
+		}
+
+		protected System.IO.Stream ReadFile(string name)
+		{
+			string file = Path + name;
+			if (System.IO.File.Exists(file))
+				return System.IO.File.OpenRead(file);
+			return null;
+
+		}
+
+		protected System.Configuration.Configuration GetConfig(string configFile = "app.config")
+		{
+			string file = Path + configFile;
+			if (System.IO.File.Exists(file))
+			{
+				System.Configuration.ExeConfigurationFileMap fm = new System.Configuration.ExeConfigurationFileMap();
+				fm.ExeConfigFilename = file;
+				return System.Configuration.ConfigurationManager.OpenMappedExeConfiguration(fm, System.Configuration.ConfigurationUserLevel.None);
+			}
+			return null;
 		}
 	}
 }

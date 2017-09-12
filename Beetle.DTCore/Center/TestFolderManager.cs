@@ -122,7 +122,8 @@ namespace Beetle.DTCore.Center
 			if (mFolders.TryGetValue(test, out info))
 			{
 				info.Folder.UpdateFile(filename, data);
-				info.GetDomainAdapter().Status = Domains.DomainStatus.Uploading;
+				if (filename.IndexOf(".dll", StringComparison.CurrentCultureIgnoreCase) > 0)
+					info.GetDomainAdapter().Status = Domains.DomainStatus.Uploading;
 			}
 		}
 	}

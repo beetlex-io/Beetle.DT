@@ -142,14 +142,48 @@ namespace Beetle.DTCore.Domains
 			if (property != null)
 			{
 				Type ptype = property.PropertyType;
-				sb.AppendLine("public class " + test + "_Config");
-				sb.AppendLine("{");
-				foreach (PropertyInfo pp in ptype.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+				if (ptype.IsEnum)
 				{
+					Array values = Enum.GetValues(ptype);
+					Array names = Enum.GetNames(ptype);
+
+					sb.AppendLine("public enum Test_Enumn1");
+					sb.AppendLine("{");
+					for (int i = 0; i < names.Length; i++)
+					{
+						if (i > 0)
+							sb.Append(",\r\n");
+						sb.AppendFormat("{0}={1}", names.GetValue(i), (int)Enum.Parse(ptype, names.GetValue(i).ToString()));
+
+					}
+					sb.AppendLine("}");
+					sb.AppendLine("public class " + test + "_Config");
+					sb.AppendLine("{");
 					sb.AppendLine("[System.ComponentModel.Category(\"Case Config\")]");
-					sb.AppendLine(string.Format("public {0} {1} {{get;set;}}", pp.PropertyType.FullName, pp.Name));
+					sb.AppendLine(string.Format("public {0} Value {{get;set;}}", "Test_Enumn1"));
+					sb.AppendLine("}");
+
 				}
-				sb.AppendLine("}");
+				else if (ptype.IsValueType || ptype == typeof(string))
+				{
+					sb.AppendLine("public class " + test + "_Config");
+					sb.AppendLine("{");
+					sb.AppendLine("[System.ComponentModel.Category(\"Case Config\")]");
+					sb.AppendLine(string.Format("public {0} Value {{get;set;}}", ptype.FullName));
+					sb.AppendLine("}");
+				}
+				else
+				{
+
+					sb.AppendLine("public class " + test + "_Config");
+					sb.AppendLine("{");
+					foreach (PropertyInfo pp in ptype.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+					{
+						sb.AppendLine("[System.ComponentModel.Category(\"Case Config\")]");
+						sb.AppendLine(string.Format("public {0} {1} {{get;set;}}", pp.PropertyType.FullName, pp.Name));
+					}
+					sb.AppendLine("}");
+				}
 			}
 			return sb.ToString();
 		}
