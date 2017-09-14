@@ -110,6 +110,7 @@
     <Compile Include="Center\NodeAgent.cs" />
     <Compile Include="Center\ServerCenter.cs" />
     <Compile Include="Center\TestInfo.cs" />
+    <Compile Include="PropertyAttribute.cs" />
     <Compile Include="StatisticalInfo.cs" />
     <Compile Include="UnitTest.cs" />
   </ItemGroup>

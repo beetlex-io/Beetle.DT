@@ -45,7 +45,7 @@ namespace Beetle.DTCore.Domains
 
 			compilerParams.ReferencedAssemblies.Add("mscorlib.dll");
 			compilerParams.ReferencedAssemblies.Add("System.dll");
-
+			compilerParams.ReferencedAssemblies.Add("Beetle.DTCore.dll");
 
 			foreach (string reference in references)
 			{
@@ -176,6 +176,7 @@ namespace Beetle.DTCore.Domains
 
 			compilerParams.ReferencedAssemblies.Add("mscorlib.dll");
 			compilerParams.ReferencedAssemblies.Add("System.dll");
+			compilerParams.ReferencedAssemblies.Add("Beetle.DTCore.dll");
 			CompilerResults results = codeProvider.CompileAssemblyFromSource(compilerParams,
 				codes);
 

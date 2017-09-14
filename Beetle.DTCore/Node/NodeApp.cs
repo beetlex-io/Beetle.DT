@@ -124,7 +124,7 @@ namespace Beetle.DTCore.Node
             }
             catch (Exception e_)
             {
-
+				
             }
             finally
             {

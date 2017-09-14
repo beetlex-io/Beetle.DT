@@ -72,4 +72,39 @@ namespace Beetle.DTCase.Config
 	}
 
 
+	public class TestData : Beetle.DTCore.TestCase<TestDataConfig>
+	{
+		public override string Name
+		{
+			get
+			{
+				return "TEST_DATA";
+			}
+		}
+
+		protected override void OnExecute()
+		{
+			base.OnExecute();
+			Console.WriteLine(this.Config);
+			System.Threading.Thread.Sleep(1000);
+		}
+	}
+
+
+
+	public class TestDataConfig
+	{
+		public TestType Type { get; set; }
+
+		[Beetle.DTCore.Property(Type = DTCore.PropertyType.Remark)]
+		public string Remark { get; set; }
+
+		public DateTime Date { get; set; }
+
+		public int Value { get; set; }
+
+		public string Name { get; set; }
+	}
+
+
 }

@@ -1,4 +1,5 @@
-﻿using BeetleX.Buffers;
+﻿using Beetle.DTCore;
+using BeetleX.Buffers;
 using BeetleX.Clients;
 using System;
 using System.Collections.Generic;
@@ -68,10 +69,10 @@ namespace Beetle.DTCase.Tcp
 
 		protected override byte[] GetData()
 		{
-			   return Enumerable.Range(0, Config.Data.Length)
-					 .Where(x => x % 2 == 0)
-					 .Select(x => Convert.ToByte(Config.Data.Substring(x, 2), 16))
-					 .ToArray();
+			return Enumerable.Range(0, Config.Data.Length)
+				  .Where(x => x % 2 == 0)
+				  .Select(x => Convert.ToByte(Config.Data.Substring(x, 2), 16))
+				  .ToArray();
 		}
 
 	}
@@ -81,10 +82,12 @@ namespace Beetle.DTCase.Tcp
 
 	public class TcpConfig
 	{
+		[PropertyLabel("服务地址", "对应的服务器地址，IP或域名")]
 		public string Host { get; set; }
-
+		[PropertyLabel("端口", "对应的服务端口")]
 		public int Port { get; set; }
-
+		[PropertyLabel("数据", "进行压力测试发送的数据内容")]
+		[Property(Type = PropertyType.Remark)]
 		public string Data { get; set; }
 	}
 

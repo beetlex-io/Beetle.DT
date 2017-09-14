@@ -66,7 +66,10 @@ namespace Beetle.DTCase.Sql
 
 	public class SQLConfig
 	{
+		[PropertyLabel("连接字符串", "对应测试数据库的连接字符串")]
 		public string Connection { get; set; }
+		[Property(Type = PropertyType.Remark)]
+		[PropertyLabel("SQL语句", "用于压力测试执行的SQL语句")]
 		public string Sql { get; set; }
 	}
 }

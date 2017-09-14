@@ -46,6 +46,8 @@ namespace Beetle.DTCore.Domains
 			AddReference("System.Xml.Linq.dll");
 			AddReference("System.XML.dll");
 			AddReference("System.Core.dll");
+			//customer
+			AddReference("Beetle.DTCore.dll");
 		}
 
 		public string AppName
@@ -139,6 +141,7 @@ namespace Beetle.DTCore.Domains
 		{
 			StringBuilder sb = new StringBuilder();
 			PropertyInfo property = type.GetProperty("Config");
+			string emunname = "Test_Enumn_";
 			if (property != null)
 			{
 				Type ptype = property.PropertyType;
@@ -179,8 +182,39 @@ namespace Beetle.DTCore.Domains
 					sb.AppendLine("{");
 					foreach (PropertyInfo pp in ptype.GetProperties(BindingFlags.Public | BindingFlags.Instance))
 					{
+
+						if (pp.PropertyType.IsEnum)
+						{
+							Array values = Enum.GetValues(pp.PropertyType);
+							Array names = Enum.GetNames(pp.PropertyType);
+							emunname = emunname + "a";
+
+							sb.AppendLine("public enum " + emunname);
+							sb.AppendLine("{");
+							for (int i = 0; i < names.Length; i++)
+							{
+								if (i > 0)
+									sb.Append(",\r\n");
+								sb.AppendFormat("{0}={1}", names.GetValue(i), (int)Enum.Parse(pp.PropertyType, names.GetValue(i).ToString()));
+							}
+							sb.AppendLine("}");
+						}
+						PropertyLabelAttribute pla = pp.GetCustomAttribute<PropertyLabelAttribute>();
+						if (pla != null)
+							sb.AppendLine(string.Format("[Beetle.DTCore.PropertyLabel(\"{0}\",\"{1}\")]", pla.Name, pla.Remark));
+
+						PropertyAttribute pas = pp.GetCustomAttribute<PropertyAttribute>();
+						if (pas != null && pas.Type == PropertyType.Remark)
+							sb.AppendLine("[Beetle.DTCore.Property(Type = Beetle.DTCore.PropertyType.Remark)]");
 						sb.AppendLine("[System.ComponentModel.Category(\"Case Config\")]");
-						sb.AppendLine(string.Format("public {0} {1} {{get;set;}}", pp.PropertyType.FullName, pp.Name));
+						if (pp.PropertyType.IsEnum)
+						{
+							sb.AppendLine(string.Format("public {0} {1} {{get;set;}}", emunname, pp.Name));
+						}
+						else if (pp.PropertyType.IsValueType || pp.PropertyType == typeof(string))
+						{
+							sb.AppendLine(string.Format("public {0} {1} {{get;set;}}", pp.PropertyType.FullName, pp.Name));
+						}
 					}
 					sb.AppendLine("}");
 				}

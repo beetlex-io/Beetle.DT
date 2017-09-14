@@ -43,6 +43,8 @@
 			this.cmdDeleteFiles = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.cmdRun = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.cmdAbout = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.txtStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -61,8 +63,6 @@
 			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-			this.cmdAbout = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.groupBox1.SuspendLayout();
@@ -198,6 +198,21 @@
 			this.cmdRun.Text = "Runing unit test";
 			this.cmdRun.Click += new System.EventHandler(this.cmdRun_Click);
 			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
+			// 
+			// cmdAbout
+			// 
+			this.cmdAbout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.cmdAbout.Image = ((System.Drawing.Image)(resources.GetObject("cmdAbout.Image")));
+			this.cmdAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.cmdAbout.Name = "cmdAbout";
+			this.cmdAbout.Size = new System.Drawing.Size(36, 36);
+			this.cmdAbout.Text = "About me";
+			this.cmdAbout.Click += new System.EventHandler(this.cmdAbout_Click);
+			// 
 			// statusStrip1
 			// 
 			this.statusStrip1.BackColor = System.Drawing.Color.White;
@@ -327,7 +342,7 @@
 			this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
 			this.imageList1.Images.SetKeyName(0, "文件夹.png");
 			this.imageList1.Images.SetKeyName(1, "if_document_2318462.png");
-			this.imageList1.Images.SetKeyName(2, "文件夹 (1).png");
+			this.imageList1.Images.SetKeyName(2, "文件夹 更新 (2).png");
 			// 
 			// lstFolders
 			// 
@@ -363,21 +378,6 @@
 			this.openFileDialog1.FileName = "openFileDialog1";
 			this.openFileDialog1.Multiselect = true;
 			this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
-			// 
-			// toolStripSeparator4
-			// 
-			this.toolStripSeparator4.Name = "toolStripSeparator4";
-			this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
-			// 
-			// cmdAbout
-			// 
-			this.cmdAbout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.cmdAbout.Image = ((System.Drawing.Image)(resources.GetObject("cmdAbout.Image")));
-			this.cmdAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.cmdAbout.Name = "cmdAbout";
-			this.cmdAbout.Size = new System.Drawing.Size(36, 36);
-			this.cmdAbout.Text = "About me";
-			this.cmdAbout.Click += new System.EventHandler(this.cmdAbout_Click);
 			// 
 			// FrmMain
 			// 

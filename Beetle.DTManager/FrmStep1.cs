@@ -48,13 +48,15 @@ namespace Beetle.DTManager
 
 		public IList<NodeInfo> Nodes { get; set; }
 
+		private object mConfig;
+
 		[Handler]
 		[FrmMain.FrmInvokeFilter]
 		public void ListTestCase(ListTestCaseResponse e)
 		{
 			foreach (string item in e.Cases)
 			{
-				lstFolders.Items.Add(item);
+				lstFolders.Items.Add(new ListViewItem(item, 2));
 			}
 		}
 
@@ -136,11 +138,11 @@ namespace Beetle.DTManager
 				txtUsers.Text = setting.Users.ToString();
 				if (!string.IsNullOrEmpty(setting.Config))
 				{
-					propertyGrid1.SelectedObject = Newtonsoft.Json.JsonConvert.DeserializeObject(setting.Config, type);
+					mConfig = Newtonsoft.Json.JsonConvert.DeserializeObject(setting.Config, type);
 				}
 				else
 				{
-					propertyGrid1.SelectedObject = Activator.CreateInstance(type);
+					mConfig = Activator.CreateInstance(type);
 				}
 			}
 		}
@@ -212,27 +214,33 @@ namespace Beetle.DTManager
 			ListViewItem item = GetSelectItem();
 			if (item != null)
 			{
-				mLastTest = item.Text;
-				mSuccess = 0;
-				mErrors = 0;
-				chart1.Series["Success"].Points.Clear();
 
-				chart1.Series["Error"].Points.Clear();
-
-				foreach (NodeInfo node in Nodes)
+				FrmProperties properties = new DTManager.FrmProperties();
+				properties.SelectObject = mConfig;
+				if (properties.ShowDialog(this) == DialogResult.Yes)
 				{
-					node.Report.Reset();
-				}
+					mLastTest = item.Text;
+					mSuccess = 0;
+					mErrors = 0;
+					chart1.Series["Success"].Points.Clear();
 
-				Codes.CaseSetting setting = new Codes.CaseSetting();
-				setting.Users = int.Parse(txtUsers.Text);
-				if (propertyGrid1.SelectedObject != null)
-				{
-					setting.Config = Newtonsoft.Json.JsonConvert.SerializeObject(propertyGrid1.SelectedObject);
+					chart1.Series["Error"].Points.Clear();
+
+					foreach (NodeInfo node in Nodes)
+					{
+						node.Report.Reset();
+					}
+
+					Codes.CaseSetting setting = new Codes.CaseSetting();
+					setting.Users = int.Parse(txtUsers.Text);
+					if (mConfig != null)
+					{
+						setting.Config = Newtonsoft.Json.JsonConvert.SerializeObject(mConfig);
+					}
+					Codes.ManagerSetting.SaveCaseSetting(this.UnitTest, item.Text, setting);
+					Client.RunTest(this.UnitTest, item.Text, int.Parse(txtUsers.Text), mConfig,
+						Nodes.Select(d => d.Name).ToArray());
 				}
-				Codes.ManagerSetting.SaveCaseSetting(this.UnitTest, item.Text, setting);
-				Client.RunTest(this.UnitTest, item.Text, int.Parse(txtUsers.Text), propertyGrid1.SelectedObject,
-					Nodes.Select(d => d.Name).ToArray());
 			}
 			else
 			{

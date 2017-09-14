@@ -45,9 +45,13 @@ namespace Beetle.DTCase.Http
 		}
 	}
 
+
+
+
 	public class Config
 	{
-
+		[PropertyLabel("连接地址", "进行压力测试的连接，如果是多个连接可以用;来分隔")]
+		[Property(Type = PropertyType.Remark)]
 		public string Urls { get; set; }
 	}
 }
