@@ -17,7 +17,7 @@ namespace Beetle.DTCore.Center
 			this.Center = center;
 		}
 
-		public void Register(Network.NodeRegister register, ISession session)
+		public void Register(Network.Register register, ISession session)
 		{
 			GetOrCreateNode(register.Name, session);
 		}

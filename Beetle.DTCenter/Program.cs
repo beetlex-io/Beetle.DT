@@ -15,8 +15,12 @@ namespace Beetle.DTCenter
 			int port = int.Parse(ConfigurationManager.AppSettings["server-port"]);
 			string manager_host = ConfigurationManager.AppSettings["manager-host"];
 			int manager_port = int.Parse(ConfigurationManager.AppSettings["manager-port"]);
+			string serverkey = ConfigurationManager.AppSettings["server-key"];
+			string managerkey = ConfigurationManager.AppSettings["manager-key"];
 			Beetle.DTCore.Center.ServerCenter server = new DTCore.Center.ServerCenter();
 			server.Loger.Handlers.Add(new Beetle.DTCore.ConsoleLogHandler());
+			server.ManagerKey = managerkey;
+			server.ServerKey = serverkey;
 			server.Open(host, port, manager_host, manager_port);
 			Console.Read();
 

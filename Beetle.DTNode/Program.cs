@@ -13,9 +13,11 @@ namespace Beetle.DTNode
 		{
 			string host = ConfigurationManager.AppSettings["server-host"];
 			int port = int.Parse(ConfigurationManager.AppSettings["server-port"]);
+			string serverkey = ConfigurationManager.AppSettings["server-key"];
 			Beetle.DTCore.Node.NodeApp app = new DTCore.Node.NodeApp(host, port);
 			app.Loger.Type = DTCore.LogType.ALL;
 			app.Loger.Handlers.Add(new Beetle.DTCore.ConsoleLogHandler());
+			app.VerifyKey = serverkey;
 			app.Open();
 			//app.StartProcess("HTTP_TEST");
 			//, "httptest", "{Url:\"http://www.baidu.com\"}"

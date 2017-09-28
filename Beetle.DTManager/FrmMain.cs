@@ -7,6 +7,7 @@ using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -44,6 +45,8 @@ namespace Beetle.DTManager
 			txtPort.Text = setting.Port.ToString();
 			this.Text = string.Format("Performance Test Manager [{0}]",
 				this.GetType().Assembly.GetName().Version.ToString());
+			string managerkey = ConfigurationManager.AppSettings["manager-key"];
+			mClient.VerifyKey = managerkey;
 			mClient.MessageRoute.Register(this);
 		}
 

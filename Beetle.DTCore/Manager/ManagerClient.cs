@@ -15,7 +15,13 @@ namespace Beetle.DTCore.Manager
 		{
 
 			MessageRoute = new MR.RouteCenter();
+			this.Name = Guid.NewGuid().ToString("N");
 		}
+
+
+		public string Name { get; set; }
+
+		public string VerifyKey { get; set; }
 
 		private IClient mClient;
 
@@ -34,7 +40,10 @@ namespace Beetle.DTCore.Manager
 
 		private void OnConnect(IClient c)
 		{
-
+			Network.Register register = new Network.Register();
+			register.Name = Name;
+			register.CreateToken(this.VerifyKey);
+			c.Send(register);
 		}
 
 		private void OnError(IClient client, Exception e, string message)
